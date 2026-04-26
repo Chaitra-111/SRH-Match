@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cricket Analyzer</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: white;
+        }
+
+        .container {
+            background: white;
+            color: black;
+            width: 700px;
+            margin: 40px auto;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        img {
+            width: 100%;
+            margin-top: 20px;
+            display: none;
+        }
+
+        select {
+            padding: 10px;
+            margin-top: 10px;
+        }
+    </style>
+
+</head>
+<body>
+
+<h1>SRH Cricket Analyzer</h1>
+
+<div class="container">
+
+    <h3>Status</h3>
+    <p>Average Score: {{ avg_score }}</p>
+    <p>Highest Score: {{ highest }}</p>
+    <p>Total Wins: {{ wins }}</p>
+
+    <h3>Select Visualization</h3>
+    <select onchange="showGraph(this.value)">
+        <option value="">-- Select Graph --</option>
+        <option value="score">SRH Scores</option>
+        <option value="result">Match Results</option>
+        <option value="comparison">Score Comparison</option>
+        <option value="player">Best Player</option>
+    </select>
+
+    <img id="score" src="{{ url_for('static', filename='score.png') }}">
+    <img id="result" src="{{ url_for('static', filename='result.png') }}">
+    <img id="comparison" src="{{ url_for('static', filename='comparison.png') }}">
+    <img id="player" src="{{ url_for('static', filename='player.png') }}">
+
+</div>
+
+<script>
+function showGraph(type) {
+    let graphs = ["score", "result", "comparison", "player"];
+
+    graphs.forEach(g => {
+        document.getElementById(g).style.display = "none";
+    });
+
+    if(type) {
+        document.getElementById(type).style.display = "block";
+    }
+}
+</script>
+
+</body>
+</html>
